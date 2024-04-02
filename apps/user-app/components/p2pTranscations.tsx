@@ -3,7 +3,7 @@ import { Card } from "@repo/ui/card";
 
 async function username(userId: number) {
     const res: any = await db.user.findFirst({
-        where: { userId: userId }
+        where: { id: userId }
     });
     return res.name;
 }

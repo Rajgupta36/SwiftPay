@@ -17,7 +17,7 @@ export const RampTransactions = async (provider: any, amount: number) => {
     const data = await prisma.onRampTransaction.create({
         data: {
             provider,
-            status: "Processing",
+            status: "pending",
             startTime: new Date(),
             token: token,
             userId: Number(session?.user?.id),

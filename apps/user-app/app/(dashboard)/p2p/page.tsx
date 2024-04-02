@@ -5,10 +5,11 @@ import { authOptions } from "../../lib/auth";
 import { BalanceCard } from "../../../components/BalanceCard";
 import P2pTranscations from "../../../components/p2pTranscations";
 
-const session = await getServerSession(authOptions);
+
 
 
 async function getBalance() {
+    const session = await getServerSession(authOptions);
     const balance = await db.balance.findFirst({
         where: {
             userId: Number(session?.user?.id)
@@ -21,6 +22,7 @@ async function getBalance() {
 }
 
 async function p2pdetails() {
+    const session = await getServerSession(authOptions);
     const p2phistory = await db.p2pTransfer.findMany({
         where: { fromUserId: Number(session?.user?.id) }
     })

@@ -33,7 +33,7 @@ app.post("/hdfcWebhook", async (req, res) => {
         amount: req.body.amount
     };
     const status = await db.onRampTransaction.findFirst({ where: { token: paymentInformation.token } });
-    if (status?.status == "Processing") {
+    if (status?.status == "pending") {
         try {
             await db.$transaction([
                 db.balance.updateMany({
@@ -52,7 +52,7 @@ app.post("/hdfcWebhook", async (req, res) => {
                         token: paymentInformation.token
                     },
                     data: {
-                        status: "Success",
+                        status: "success",
                     }
                 })
             ]);

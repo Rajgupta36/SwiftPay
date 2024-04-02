@@ -53,7 +53,7 @@ export const p2p_transcations = async (Person_Number: string, Amount: number) =>
             });
         })
 
-    } catch (e) {
+    } catch (e: any) {
         if (transaction) {
             await db.p2pTransfer.update({
                 where: { id: transaction.id },
