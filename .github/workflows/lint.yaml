@@ -1,0 +1,28 @@
+name: workflow-lint
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  continuous-integration:
+    name: Performs linting and testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20" # Adjust this to the appropriate Node.js version
+
+      - name: Install Dependencies
+        run: npm install
+      - name: Generate Prisma Client
+        run: npm run db:generate
+      - name: Run Build
+        run: npm run build
